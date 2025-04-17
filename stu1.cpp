@@ -67,7 +67,7 @@ int WINAPI WinMain(
         DispatchMessage(&msg);
     }
 
-    return (int)msg.wParam;
+    return (int)msg.wParam;//强转方便读写
 }
 
 // 窗口过程函数
@@ -93,7 +93,7 @@ LRESULT CALLBACK WndProc(
             VARIABLE_PITCH,
             TEXT("微软雅黑"));
 
-        // 获取声音文件路径
+        // 获取声音文件路径(可选)
         TCHAR szPath[MAX_PATH];
         GetModuleFileName(NULL, szPath, MAX_PATH);
         PathRemoveFileSpec(szPath);
