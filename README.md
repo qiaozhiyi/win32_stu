@@ -1,7 +1,5 @@
 # Windows API 示例程序 - 声音播放与文本显示
 
-![Windows Application Screenshot](示例截图链接) <!-- 可替换为实际截图链接 -->
-
 ## 功能特性
 - 创建标准 Windows 窗口
 - 播放 WAV 格式音频文件
