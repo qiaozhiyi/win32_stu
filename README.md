@@ -21,7 +21,7 @@
    - Shlwapi.lib (Shell轻量级工具库)
 
 ## 快速开始
-1. 将`sound.wav`文件置于可执行文件同级目录
+1. 将`sound.wav`文件置于可执行文件同级目录(建议不要使用这个播放)
 2. 推荐使用Visual Studio编译步骤：
    ```bash
    cl main.c /link user32.lib gdi32.lib Winmm.lib Shlwapi.lib
