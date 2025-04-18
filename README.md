@@ -1,3 +1,5 @@
-# 对于win32api的学习
-## stu1是实现了一个基于win32api的窗口应用。
-### 详细说明请看stu1.md对于stu1的解析。
+# Win32API 学习
+
+## 简介
+`stu1` 是一个基于 Win32API 实现的 Windows 窗口应用程序。  
+详细说明请参阅 [stu1.md](stu1.md)。

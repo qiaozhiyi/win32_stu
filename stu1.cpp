@@ -1,11 +1,7 @@
 #include <Windows.h>
 #include <tchar.h>
-#include <Shlwapi.h>    // 路径处理
-#pragma comment(lib, "Winmm.lib")
-#pragma comment(lib, "Shlwapi.lib")
 
-#define SOUND_FILE  TEXT("sound.wav")  // 使用英文文件名
-
+//创建回调函数
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int WINAPI WinMain(
@@ -27,6 +23,7 @@ int WINAPI WinMain(
     wcex.lpszClassName = szClassName;
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  // 小图标
 
+    //设计错误处理
     if (!RegisterClassEx(&wcex)) {
         MessageBox(NULL,
             TEXT("窗口类注册失败!"),
@@ -93,19 +90,6 @@ LRESULT CALLBACK WndProc(
             VARIABLE_PITCH,
             TEXT("微软雅黑"));
 
-        // 获取声音文件路径(可选)
-        TCHAR szPath[MAX_PATH];
-        GetModuleFileName(NULL, szPath, MAX_PATH);
-        PathRemoveFileSpec(szPath);
-        PathAppend(szPath, SOUND_FILE);
-
-        // 播放声音（带错误检查）
-        if (!PlaySound(szPath, NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT)) {
-            MessageBox(hWnd,
-                TEXT("无法加载音频文件\n请确认文件存在且格式正确"),
-                TEXT("音频错误"),
-                MB_ICONWARNING | MB_OK);
-        }
         return 0;
     }
 
@@ -115,7 +99,7 @@ LRESULT CALLBACK WndProc(
 
         // 设置字体和颜色
         SelectObject(hdc, hFont);
-        SetTextColor(hdc, RGB(30, 144, 255));  // 道奇蓝
+        SetTextColor(hdc, RGB(30, 144, 255));  // 道奇蓝(参考RGB调色版)
         SetBkMode(hdc, TRANSPARENT);
 
         // 绘制文本
