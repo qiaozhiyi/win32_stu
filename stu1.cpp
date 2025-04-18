@@ -22,6 +22,7 @@ int WINAPI WinMain(
     wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wndclassex.lpszClassName = szClassName;
     wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  // 小图标
+    wndclassex.lpszMenuName = NULL;
 
     //设计错误处理
     if (!RegisterClassEx(&wndclassex)) {

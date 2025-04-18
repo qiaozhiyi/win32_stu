@@ -78,6 +78,78 @@ typedef struct tagWNDCLASSEXA {
 | **`CS_IME`**          | `0x00010000`   | 启用输入法编辑器（IME）支持。                                           |
 
 ---  
-### C. **讲解一下lpfnWndProc：**
+### C. **讲解一下`lpfnWndProc`：**
 >全称 ​​Long Pointer to Window Procedure​​
 
+根据名字可以看出来本质上是一个长指针指向之前定义的回调函数的返回值，然而那个回调函数是实现对于窗口的各种操作对应相应。
+
+### D. **讲解一下`hInstance`：**
+实际上就是一个实例化的句柄也可以称作一个模块标志。
+
+### E. **讲解一下`hIcon`：**
+    Icon很好理解吧，是一个图标的意思，实际上就是可执行文件的图标(是的没错就是你在桌面上看到的那个东西)
+通过调用LoadIcon或者调用LoadImage进行调用。(Image也未尝不是一种Icon)
+> 那么我们讲解一下LoadIcon函数吧
+
+```cpp 
+LoadIconA(
+    _In_opt_ HINSTANCE hInstance,
+    _In_ LPCSTR lpIconName);
+WINUSERAPI
+```
+第一个参数是句柄第二个是加载的图标的`内定`名称(微软给的)。
+可能取值如下
+
+| 图标常量                 | 描述                                                                 |
+|-------------------------|---------------------------------------------------------------------|
+| `IDI_APPLICATION`       | 默认应用程序图标（通常是窗口或应用程序的默认图标）                  |
+| `IDI_HAND`              | 错误图标（红色背景的“X”或手形图标，表示严重错误如系统崩溃）         |
+| `IDI_QUESTION`          | 问号图标（旧版Windows中使用，现代UI可能已替换为其他设计）           |
+| `IDI_EXCLAMATION`       | 感叹号图标（黄色三角形，用于警告或注意事项）                       |
+| `IDI_ASTERISK`          | 信息图标（蓝色背景的“i”，通常用于提示性消息）                       |
+| `IDI_WINLOGO`           | Windows徽标（经典Windows标志，如开始菜单图标）                      |
+| `IDI_WARNING`           | 同 `IDI_EXCLAMATION`，表示警告                                      |
+| `IDI_ERROR`             | 同 `IDI_HAND`，表示错误                                             |
+| `IDI_INFORMATION`       | 同 `IDI_ASTERISK`，表示信息提示                                     |
+| `IDI_SHIELD`            | 盾牌图标（用于UAC提示或需要管理员权限的操作）   
+
+### F. **讲解一下`hCursor`：**
+同上，本体函数如下
+``` cpp
+LoadCursorA(
+    _In_opt_ HINSTANCE hInstance,
+    _In_ LPCSTR lpCursorName);
+```
+一个句柄函数一个调用光标的名称，值得注意的是**光标**，就是你的鼠标的指示状态。
+
+| 光标常量                | 描述                                                                 |
+|-------------------------|---------------------------------------------------------------------|
+| `IDC_ARROW`            | 标准箭头光标（默认光标）                                            |
+| `IDC_IBEAM`            | I 形文本输入光标（用于可编辑文本区域）                              |
+| `IDC_WAIT`             | 等待/忙碌光标（通常为沙漏或旋转圆圈）                               |
+| `IDC_CROSS`            | 十字线光标（常用于绘图或选择区域）                                  |
+| `IDC_UPARROW`          | 垂直箭头光标（指向正上方）                                          |
+| `IDC_SIZE`             | 旧版 Windows 的调整大小光标（四向箭头）                             |
+| `IDC_ICON`             | 旧版 Windows 的图标移动光标                                         |
+| `IDC_SIZENWSE`         | 双箭头斜向光标（西北-东南方向，用于调整窗口大小）                   |
+| `IDC_SIZENESW`         | 双箭头斜向光标（东北-西南方向，用于调整窗口大小）                   |
+| `IDC_SIZEWE`           | 双箭头水平光标（左右方向，用于水平调整窗口大小）                    |
+| `IDC_SIZENS`           | 双箭头垂直光标（上下方向，用于垂直调整窗口大小）                    |
+| `IDC_SIZEALL`          | 四向箭头光标（用于移动窗口或对象）                                  |
+| `IDC_NO`               | 禁止操作光标（带斜线的圆圈，表示当前操作不可用）                    |
+| `IDC_HAND`             | 手形光标（通常用于超链接或可点击元素）                              |
+| `IDC_APPSTARTING`      | 应用程序启动光标（箭头带小沙漏，表示程序正在启动）                  |
+| `IDC_HELP`             | 帮助选择光标（箭头带问号）                                          |
+
+### G. **讲解一下`hbrBackground`：**
+如同它的名字一样就是个背景颜色。
+
+### H. **讲解一下`lpszMenuName`：**
+同之前上边长非零指针指向一个回调函数实现菜单的编写。
+
+### I. **讲解一下`lpszClassName`：**
+指定窗口的名称
+>没错就是那个窗口名左上角显示的那个东西。
+
+### J. **讲解一下`hIconSm`：**
+与之前的不是Sm版本的相同。
