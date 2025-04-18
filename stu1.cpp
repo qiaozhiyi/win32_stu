@@ -11,20 +11,20 @@ int WINAPI WinMain(
     _In_ int nCmdShow)
 {
     // 1. 注册窗口类
-    WNDCLASSEX wcex = { sizeof(WNDCLASSEX) };
+    WNDCLASSEX wndclassex = { sizeof(WNDCLASSEX) };
     const TCHAR szClassName[] = TEXT("MyWindowsApp");
 
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc;
-    wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);  // 正确图标
-    wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszClassName = szClassName;
-    wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  // 小图标
+    wndclassex.style = CS_HREDRAW | CS_VREDRAW;
+    wndclassex.lpfnWndProc = WndProc;
+    wndclassex.hInstance = hInstance;
+    wndclassex.hIcon = LoadIcon(NULL, IDI_APPLICATION);  // 正确图标
+    wndclassex.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wndclassex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wndclassex.lpszClassName = szClassName;
+    wndclassex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);  // 小图标
 
     //设计错误处理
-    if (!RegisterClassEx(&wcex)) {
+    if (!RegisterClassEx(&wndclassex)) {
         MessageBox(NULL,
             TEXT("窗口类注册失败!"),
             TEXT("严重错误"),
