@@ -1,5 +1,25 @@
 ﻿# 针对 `stu1.cpp` 的学习笔记
 
+## 目录
+1. [关键步骤总结](#关键步骤总结)
+2. [详细讲解](#详细讲解)
+   - [注册窗口类 RegisterClassEx()](#一注册窗口类registerclassex)
+     - [cbSize](#a-先讲解一下cbsize实际上就是确定结构体的大小其中作用如下)
+     - [style 类型](#b-讲解一下style类型)
+       - [style 标志表](#style-标志表)
+     - [lpfnWndProc](#c-讲解一下lpfnwndproc)
+     - [hInstance](#d-讲解一下hinstance)
+     - [hIcon](#e-讲解一下hicon)
+       - [hIcon 标志表](#hicon-标志表)
+     - [hCursor](#f-讲解一下hcursor)
+       - [hCursor 标志表](#hcursor-标志表)
+     - [hbrBackground](#g-讲解一下hbrbackground)
+     - [lpszMenuName](#h-讲解一下lpszmenuname)
+     - [lpszClassName](#i-讲解一下lpszclassname)
+     - [hIconSm](#j-讲解一下hiconsm)
+
+---
+
 ## 关键步骤总结
 
 Windows窗口创建的四个核心步骤：
@@ -20,8 +40,12 @@ Windows窗口创建的四个核心步骤：
    - **获取消息**：`GetMessage()`  
    - **转换消息**：`TranslateMessage()`  
    - **分发处理**：`DispatchMessage()`（最终交由回调函数处理）
+
+---
+
 ## 详细讲解
-###	一.注册窗口类RegisterClassEx()
+
+### 一.注册窗口类RegisterClassEx()
 ```cpp 
 ATOM WINAPI RegisterClassExA(_In_ CONST WNDCLASSEXA *);
 ```
@@ -30,7 +54,7 @@ ATOM WINAPI RegisterClassExA(_In_ CONST WNDCLASSEXA *);
 
 > * 关于WINAPI：实际上就是一个_stdcall方法宏定义。
 
-注册之前需要预定义一下WNDCLASSEX对象实现对于窗口的初始化操作，WNDCLASSEX结构体如下所展示
+注册之前需要预定义一下WNDCLASSEX对象实现对于窗口的初始化操作，WNDCLASSEX结构体如下所展示：
 ``` cpp
 typedef struct tagWNDCLASSEXA {
     UINT        cbSize;
@@ -87,7 +111,7 @@ typedef struct tagWNDCLASSEXA {
 实际上就是一个实例化的句柄也可以称作一个模块标志。
 
 ### E. **讲解一下`hIcon`：**
-    Icon很好理解吧，是一个图标的意思，实际上就是可执行文件的图标(是的没错就是你在桌面上看到的那个东西)
+Icon很好理解吧，是一个图标的意思，实际上就是可执行文件的图标(是的没错就是你在桌面上看到的那个东西)
 通过调用LoadIcon或者调用LoadImage进行调用。(Image也未尝不是一种Icon)
 > 那么我们讲解一下LoadIcon函数吧
 
@@ -100,6 +124,7 @@ WINUSERAPI
 第一个参数是句柄第二个是加载的图标的`内定`名称(微软给的)。
 可能取值如下
 
+#### `hIcon` 标志表
 | 图标常量                 | 描述                                                                 |
 |-------------------------|---------------------------------------------------------------------|
 | `IDI_APPLICATION`       | 默认应用程序图标（通常是窗口或应用程序的默认图标）                  |
@@ -122,6 +147,7 @@ LoadCursorA(
 ```
 一个句柄函数一个调用光标的名称，值得注意的是**光标**，就是你的鼠标的指示状态。
 
+#### `hCursor` 标志表
 | 光标常量                | 描述                                                                 |
 |-------------------------|---------------------------------------------------------------------|
 | `IDC_ARROW`            | 标准箭头光标（默认光标）                                            |
@@ -153,3 +179,5 @@ LoadCursorA(
 
 ### J. **讲解一下`hIconSm`：**
 与之前的不是Sm版本的相同。
+
+# 浅浅的入个门吧，先写到这里！
