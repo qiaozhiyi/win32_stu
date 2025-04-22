@@ -46,6 +46,7 @@ int WINAPI WinMain(
         hInstance,
         NULL);
 
+    //错误检验
     if (!hWnd) {
         MessageBox(NULL,
             TEXT("窗口创建失败!"),
